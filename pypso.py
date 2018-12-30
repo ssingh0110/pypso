@@ -4,13 +4,13 @@ import numpy as np
 VarMin = -10 	# Lower Bound
 VarMax = +10 	# Upper Bound
 Dim = 5 		# dimension for PSO 
-GlobalBestCost = 100000000000 # Random Large Number
+GlobalBestCost = 1000000000000000000000000000000 # Random Large Number
 
 # PSO parameters
 global nPop
 global Maxit
-Maxit = 50		# Maximum iteration
-nPop = 100	    # Population size
+Maxit = 1000	# Maximum iteration
+nPop = 50	    # Population size
 w = 1 			# Inertia coefficient
 damp = 0.99		# Damping ration of inertia
 c1 = 2			# Personal acceleration coefficient
@@ -54,27 +54,29 @@ class empty_particle:
 		if self.best.cost < GlobalBestCost:
 			GlobalBestCost = self.best.cost
 			GlobalBestPosition = self.best.position
+			#print GlobalBestPosition
+			#print GlobalBestCost
 
 # PSO Initialization
 particle = [empty_particle() for i in range(0, nPop)]
 for i in range(0, nPop):
 	empty_particle.reshape(particle[i])
-	print i, ": ",particle[i].position, particle[i].cost
+	#print i, ": ",particle[i].velocity
 
 # Main Loop
 for i in range(0, Maxit):
 	for j in range(0, nPop):
 		# Update Velocity
 		a = particle[j].velocity
-		b_1 = np.random.uniform(Dim)
+		b_1 = np.random.rand(Dim)
 		b_2 = particle[j].best.position - particle[j].position
-		c_1 = np.random.uniform(Dim)
+		c_1 = np.random.rand(Dim)
 		c_2 = GlobalBestPosition - particle[j].position
 
 		particle[j].velocity = w*a \
 					+ c1*np.multiply(b_1, b_2) \
 					+ c2*np.multiply(c_1, c_2) 
-		
+
 		# Update Position
 		particle[j].position = particle[j].position \
 					+ particle[j].velocity
