@@ -64,6 +64,18 @@ for i in range(0, nPop):
 	empty_particle.reshape(particle[i])
 	#print i, ": ",particle[i].velocity
 
+# Plotting Results
+def plot(arr):
+	plt.semilogy(arr)
+	plt.grid(b=bool, which="both", axis="both", color = 'g', linestyle = '--')
+	plt.xlabel("Iteration")
+	plt.ylabel("Best Cost")
+	plt.title("PSO Implementation in Python")
+	plt.savefig('BestCost.png')
+	plt.show(block=False)
+	plt.pause(5)
+	plt.close()
+
 # Main Loop
 for i in range(0, Maxit):
 	for j in range(0, nPop):
@@ -96,12 +108,11 @@ for i in range(0, Maxit):
 			GlobalBestPosition = particle[j].best.position
 
 		# Best Cost
-	#print "Iteration = ", i, ": Best Cost", GlobalBestCost, GlobalBestPosition
+	print "Iter: %d"%i, " Best Cost: ", GlobalBestCost
+	#print "Best Position: ",GlobalBestPosition
 	RecordedBestCost.append(GlobalBestCost)
 	# Damping Inertia
 	w = w*damp
-plt.semilogy(RecordedBestCost)
-plt.grid(b=bool, which="both", axis="both", color = 'g', linestyle = '--')
-plt.xlabel("Iteration")
-plt.ylabel("Best Cost")
-plt.show()
+
+# Calling Plot Function
+plot(RecordedBestCost)
