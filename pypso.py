@@ -1,11 +1,12 @@
 import numpy as np
+import matplotlib.pyplot as plt
 
 # Variables Initialization
 VarMin = -10 	# Lower Bound
 VarMax = +10 	# Upper Bound
 Dim = 5 		# dimension for PSO 
 GlobalBestCost = 1000000000000000000000000000000 # Random Large Number
-
+RecordedBestCost = []
 # PSO parameters
 global nPop
 global Maxit
@@ -95,7 +96,12 @@ for i in range(0, Maxit):
 			GlobalBestPosition = particle[j].best.position
 
 		# Best Cost
-	print "Iteration = ", i, ": Best Cost", GlobalBestCost, GlobalBestPosition
-
+	#print "Iteration = ", i, ": Best Cost", GlobalBestCost, GlobalBestPosition
+	RecordedBestCost.append(GlobalBestCost)
 	# Damping Inertia
 	w = w*damp
+plt.semilogy(RecordedBestCost)
+plt.grid(b=bool, which="both", axis="both", color = 'g', linestyle = '--')
+plt.xlabel("Iteration")
+plt.ylabel("Best Cost")
+plt.show()
