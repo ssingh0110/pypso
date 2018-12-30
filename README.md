@@ -1,1 +1,1 @@
-"PSO Implementation In Python 2.7" 
+"A Tutorial on Particle Swarm Optimization Implementation In Python 2.7" 
